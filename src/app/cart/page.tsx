@@ -6,6 +6,7 @@ import { BiShoppingBag } from "react-icons/bi";
 import { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import { FiShoppingCart } from "react-icons/fi";
+import StripeCheckOutButton from "@/components/sections/checkOut";
 
 const CartDataLoadingFromApi = () => {
   return (
@@ -53,7 +54,9 @@ const LoadedCartData = () => {
                     <p>${totalPrice}</p>
                   </div>
                 </div>
-                <div>{/* <StripeCheckOutButton products={cartItems} /> */}</div>
+                <div>
+                  <StripeCheckOutButton products={cartItems} />
+                </div>
               </div>
             </div>
           </div>
