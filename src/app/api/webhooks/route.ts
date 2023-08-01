@@ -49,6 +49,12 @@ export async function POST(req: any, res: any) {
 
       await db.delete(cartTable).where(eq(cartTable.user_id, userId));
 
+      console.log("payment success-----------------------", session);
+      const line_Items = await stripe.checkout.sessions.listLineItems(
+        // @ts-ignore
+        event.data.object!.id
+      );
+
       return new Response("Payment Confirmation Router Reciept", {
         status: 200,
       });
