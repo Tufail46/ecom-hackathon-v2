@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const { userId } = auth();
 
   const body = await request.json();
-  console.log(body);
+
   const customer = await stripe.customers.create({
     metadata: {
       userId: userId,
@@ -27,8 +27,8 @@ export async function POST(request: NextRequest) {
         payment_method_types: ["card"],
         billing_address_collection: "auto",
         shipping_options: [
-          { shipping_rate: "shr_1NNQEiCWhuWDHCyLI3ZEbn2T" },
-          { shipping_rate: "shr_1NNQdtCWhuWDHCyLVxFex7Oe" },
+          { shipping_rate: "shr_1NciKkDOe5k9hx24GXCZb5zy" },
+          { shipping_rate: "shr_1NciLUDOe5k9hx24E3aAd2iy" },
         ],
         invoice_creation: {
           enabled: true,

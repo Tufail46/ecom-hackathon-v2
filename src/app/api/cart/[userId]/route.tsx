@@ -7,15 +7,19 @@ export const GET = async (
   { params: { userId } }: { params: { userId: string } }
 ) => {
   if (!userId) {
-    return NextResponse.json({
-      Message: "Invalid User ID",
-    });
+    return NextResponse.json(
+      {
+        Message: "Invalid User ID",
+      },
+      { status: 500 }
+    );
   }
   try {
     const res = await db
       .select()
       .from(cartTable)
       .where(eq(cartTable.user_id, userId));
+
     const cartItems = res.map((item) => ({
       _id: item.product_id,
       name: item.product_name,
@@ -35,5 +39,9 @@ export const GET = async (
       0
     );
     return NextResponse.json({ cartItems, totalQuantity, totalAmount });
-  } catch (error) {}
+  } catch (error) {
+    return NextResponse.json({
+      Message: error,
+    });
+  }
 };
