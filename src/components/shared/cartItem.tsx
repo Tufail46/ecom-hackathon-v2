@@ -42,11 +42,17 @@ const CartItem = ({ cartItem }: Props) => {
   };
 
   const handleDelete = async () => {
-    await fetch(`/api/cart/removeitem/${cartItem._id}`),
-      {
-        method: "DELETE",
-      };
+    await fetch(`/api/cart/removeitem/${cartItem._id}`, {
+      method: "DELETE",
+    });
   };
+
+  // const handleDelete = async () => {
+  //   await fetch(`/api/cart/removeitem/${cartItem._id}`),
+  //     {
+  //       method: "DELETE",
+  //     };
+  // };
   const increament = () => {
     toast.promise(handleCart(quantity + 1), {
       loading: "Increasing Product Quantity",
@@ -67,6 +73,7 @@ const CartItem = ({ cartItem }: Props) => {
     setQuantity(quantity - 1);
     dispatch(cartActions.removeFromCart(cartItem._id));
   };
+
   const rmProduct = () => {
     toast.promise(handleDelete(), {
       loading: "Removing Product",
@@ -75,6 +82,14 @@ const CartItem = ({ cartItem }: Props) => {
     });
     dispatch(cartActions.removeProduct(cartItem._id));
   };
+  // const rmProduct = () => {
+  //   toast.promise(handleDelete(), {
+  //     loading: "Removing Product",
+  //     success: "Product Removed",
+  //     error: "Failed to Remove Product",
+  //   });
+  //   dispatch(cartActions.removeProduct(cartItem._id));
+  // };
   return (
     <div className="flex flex-col sm:flex-row items-center justify-center w-full px-5 py-7 gap-5 border-b border-gray-300 ">
       <div className="">

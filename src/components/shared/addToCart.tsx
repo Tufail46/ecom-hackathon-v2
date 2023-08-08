@@ -25,7 +25,9 @@ const AddtoCart = (props: IProps) => {
   };
 
   const handleRequestData = async () => {
-    const res = await fetch(`/api/cart/${props.userId}`);
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/${props.userId}`
+    );
     if (!res.ok) {
       throw new Error("Failed to Fetch Data From API");
     }
@@ -73,17 +75,53 @@ const AddtoCart = (props: IProps) => {
             }),
           }
         );
+
         if (!res.ok) {
           throw new Error("Failed to update data");
-        } else {
-          await handleAddToCart();
         }
+      } else {
+        await handleAddToCart();
       }
     } catch (error) {
       console.log((error as { message: string }).message);
     }
+
     setIsLoading(false);
   };
+
+  // const handleCart = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const cartData = await handleRequestData();
+  //     const existingItem = cartData.cartItems.find(
+  //       (item: any) => item._id === props.product._id
+  //     );
+
+  //     if (existingItem) {
+  //       const newQuantity = existingItem.quantity + quantity;
+  //       const newPrice = props.product.price * newQuantity;
+  //       const res = await fetch(
+  //         `${process.env.NEXT_PUBLIC_BASE_URL}/api/cart`,
+  //         {
+  //           method: "PUT",
+  //           body: JSON.stringify({
+  //             product_id: props.product._id,
+  //             quantity: newQuantity,
+  //             price: newPrice,
+  //           }),
+  //         }
+  //       );
+  //       if (!res.ok) {
+  //         throw new Error("Failed to update data");
+  //       } else {
+  //         await handleAddToCart();
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log((error as { message: string }).message);
+  //   }
+  //   setIsLoading(false);
+  // };
 
   const addtoCart = () => {
     toast.promise(handleCart(), {

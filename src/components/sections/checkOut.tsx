@@ -9,6 +9,7 @@ interface Props {
 
 const StripeCheckOutButton = (props: Props) => {
   const handleCheckout = async () => {
+    console.log("Working Strip key");
     const stripe = await getStipePromise();
     const response = await fetch("/api/stripe-session/", {
       method: "POST",
