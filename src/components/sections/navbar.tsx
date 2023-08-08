@@ -11,10 +11,14 @@ import { UserButton } from "@clerk/nextjs";
 
 export default function NavBar({ userId }: { userId: string }) {
   const disptach = useAppDispatch();
+
+  // useEffect(() => {
+  //   disptach(fetchData(userId));
+  // }),
+  //   [disptach, userId];
   useEffect(() => {
-    disptach(fetchData(userId));
-  }),
-    [disptach, userId];
+    disptach(fetchData(userId)); // Dispatch the fetchData action with the user id
+  }, [disptach, userId]);
 
   const [nav, setNav] = useState(false);
   const totalItems = useAppSelector((state) => state.cart.totalQuantity);
