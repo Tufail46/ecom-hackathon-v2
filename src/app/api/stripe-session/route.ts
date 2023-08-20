@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   const { userId } = auth();
 
   const body = await request.json();
-
+  console.log("Body", body);
   const customer = await stripe.customers.create({
     metadata: {
       userId: userId,
@@ -39,8 +39,8 @@ export async function POST(request: NextRequest) {
             price_data: {
               currency: "usd",
               product_data: {
-                name: item.name,
-                images: [item.image],
+                name: item.title,
+                images: [item.images],
               },
               unit_amount: item.price * 100,
             },
